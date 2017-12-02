@@ -69,7 +69,7 @@ var UserSchema = new Schema({
   profile_image: {
     type: Object
   },
-  date_created: {
+  created: {
     type: Date,
     default: Date.now
   },

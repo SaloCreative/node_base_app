@@ -31,7 +31,7 @@ function hostIsInWhitelist(host) {
 }
 
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', hostIsInWhitelist(req.headers.origin));
+  // res.header('Access-Control-Allow-Origin', hostIsInWhitelist(req.headers.origin));
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'Authorization, Origin, Cache-Control, X-Requested-With, Content-Type, Accept');
@@ -62,6 +62,6 @@ app.use(function(req, res) {
 
 app.listen(port);
 
-console.log('Jellyfish Lava RESTful API server started on: ' + port);
+console.log('Node RESTful API server started on: ' + port);
 
 module.exports = app;

@@ -28,7 +28,8 @@ exports.register = function(req, res) {
 };
 
 exports.list_all_users = function(req, res) {
-  User.find({}, function(err, user) {
+  var query = User.find({}).select('first_name last_name role');
+  query.exec(function (err, user) {
     if (err || !user){
       return res.status(400).send(response.build_response(400, 'error', err))
     }
