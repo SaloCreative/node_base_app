@@ -1,0 +1,38 @@
+{
+  "name": "node_base_app",
+  "version": "0.0.1",
+  "description": "A basic auth starter app for node. Utilises mongodb and has basic user management and registration baked in",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SaloCreative/node_base_app"
+  },
+  "keywords": [
+    "RESTful",
+    "API",
+    "Authentication",
+    "JWT"
+  ],
+  "author": "Rich Comber",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaloCreative/node_base_app/issues"
+  },
+  "homepage": "https://github.com/SaloCreative/node_base_app#readme",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.15.2",
+    "compression": "^1.7.0",
+    "cors": "^2.8.4",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.3.0",
+    "mongoose": "^4.7.2"
+  }
+}
