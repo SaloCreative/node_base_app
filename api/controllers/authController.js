@@ -9,6 +9,7 @@ const Grant = mongoose.model('Grant');
 const response = require('../helpers/response');
 const permissions = require('../constants/routePermissions');
 const helperFunctions = require('../helpers/functions');
+const config = require('../constants/config');
 
 exports.sign_in = function(req, res) {
   User.findOne({
@@ -36,7 +37,7 @@ exports.sign_in = function(req, res) {
           _id: user._id
         },
         grants: grants
-      }, 'secret');
+      }, config.JWT_KEY);
 
       return res.json(response.build_response(200, 'success', 'Successfully logged in',
       {

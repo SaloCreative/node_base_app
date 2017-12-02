@@ -13,6 +13,7 @@ const User = require('./api/models/userModel');
 const Grant = require('./api/models/grantModel');
 const Notification = require('./api/models/notificationModel');
 const response = require('./api/helpers/response');
+const config = require('./api/constants/config');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/auth_app', {
@@ -40,7 +41,7 @@ app.use(function(req, res, next) {
 
 app.use(function(req, res, next) {
   if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'secret', function(err, decode) {
+    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], config.JWT_KEY, function(err, decode) {
       if (err) req.user = undefined;
       req.user = decode;
       next();
