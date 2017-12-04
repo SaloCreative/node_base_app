@@ -1,6 +1,6 @@
 # Node Starter App
 
-This project is to serve as a simple node starter application with login, registration and user menangement routes. All requests will be protected with JWT authentication and have granular permissioning. Hopefully this will provide all the necessary functionality for a base layer of an applications API
+This project is to serve as a simple node starter application with login, registration and user management routes. All requests will be authenticated with JWT tokens and have granular permissions.
 
 ## Contents
 
