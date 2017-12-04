@@ -3,9 +3,11 @@
 const mongoose = require('mongoose');
 const Grant = mongoose.model('Grant');
 const response = require('../helpers/response');
+const helperFunctions = require('../helpers/functions');
 
 exports.add_grant = function(req, res) {
-  Grant.insertMany(req.body, { ordered: false }, function(err, grant) {
+  const grantsToAdd = helperFunctions.buildGrantsToAdd(req.body, req.params.userId);
+  Grant.insertMany(grantsToAdd, { ordered: false }, function(err, grant) {
     if (err) {
       if (err.code !== 11000) {
         return res.status(400).send(response.build_response(400, 'error', err));
@@ -19,7 +21,8 @@ exports.add_grant = function(req, res) {
 };
 
 exports.remove_grant = function(req, res) {
-  Grant.deleteMany({ slug_id: { $in: req.body } }, function(err, grant) {
+  const grantsToRemove = helperFunctions.buildGrantsToRemove(req.body, req.params.userId);
+  Grant.deleteMany({ slug_id: { $in: grantsToRemove } }, function(err, grant) {
     if (err) {
       return res.status(400).send(response.build_response(400, 'error', err));
     } else {

@@ -7,10 +7,10 @@ const Schema = mongoose.Schema;
  * Organisation Schema
  */
 var GrantSchema = new Schema({
-  slug: {
+  grant: {
     type: String,
     trim: true,
-    required: [true, 'A grant slug is required!']
+    required: [true, 'A grant string is required!']
   },
   user_id: {
     type: String,

@@ -19,3 +19,27 @@ exports.hasPermissions = function (grants, requiredGrants) {
     return grants.indexOf(v) >= 0;
   });
 };
+
+exports.buildGrantsToAdd = function (grants, user_id) {
+  const grantsArray = [];
+  if (grants && grants.length) {
+    grants.forEach(function(newGrant) {
+      grantsArray.push({
+        grant: newGrant,
+        user_id: user_id,
+        slug_id: newGrant + '.' + user_id
+      });
+    });
+  }
+  return grantsArray;
+}
+
+exports.buildGrantsToRemove = function (grants, user_id) {
+  const grantsArray = [];
+  if (grants && grants.length) {
+    grants.forEach(function(newGrant) {
+      grantsArray.push(newGrant + '.' + user_id);
+    });
+  }
+  return grantsArray;
+}
