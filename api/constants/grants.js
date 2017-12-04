@@ -8,7 +8,7 @@ module.exports = {
     admin: [ 'users.admin' ]
   },
   GRANTS: {
-    index: [ 'grants.admin', 'grants.read' ],
+    show: [ 'grants.admin', 'grants.read' ],
     create: [ 'grants.admin', 'grants.create' ],
     delete: [ 'grants.admin', 'grants.delete' ],
     admin: [ 'grants.admin' ]

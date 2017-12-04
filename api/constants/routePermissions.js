@@ -18,18 +18,12 @@ module.exports = {
     }
   },
   GRANTS: {
-    INDEX: {
-      URL: '/grants',
-      METHOD: {
-        POST: grants.GRANTS.create,
-        DELETE: grants.GRANTS.delete
-
-      }
-    },
     ITEM: {
       URL: '/grants/:userId',
       METHOD: {
-        GET: grants.GRANTS.index
+        POST: grants.GRANTS.create,
+        DELETE: grants.GRANTS.delete,
+        GET: grants.GRANTS.show
       }
     }
   }

@@ -25,7 +25,7 @@ exports.sign_in = function(req, res) {
     Grant.find({ user_id: user._id }, function(err, grant) {
       if (!err && grant){
         grant.forEach(function (grant) {
-          grants.push(grant.slug);
+          grants.push(grant.grant);
         });
       }
 

@@ -6,7 +6,6 @@ module.exports = function(app) {
 
   app.route('/grants/:userId')
     .get(authHandlers.grantsRequired, grantCtr.get_user_grants)
-    .post(grantCtr.add_grant)
-    .delete(grantCtr.remove_grant);
-
+    .post(authHandlers.grantsRequired, grantCtr.add_grant)
+    .delete(authHandlers.grantsRequired, grantCtr.remove_grant);
 };
