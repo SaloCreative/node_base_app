@@ -1,0 +1,18 @@
+{
+  "first_name": "Joe",
+  "last_name": "Bloggs",
+  "role": "Role",
+  "date_of_birth": "1979-01-01",
+  "email_address": "joe.bloggs@me.co.uk",
+  "email_verified": false,
+  "hash_password": "562134jbvhwghwigH%ui123r2r8UY£ER@£bnwkfwfwdf",
+  "phone": "0100200300",
+  "address_one": "Address line one",
+  "address_two": "Address line 2",
+  "city": "Town/city",
+  "county": "County",
+  "country": "UK",
+  "profile_image": {},
+  "created": "2017-12-02 11:39:39.360Z",
+  "last_modified": "2017-12-02 11:39:39.360Z"
+}
