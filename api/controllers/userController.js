@@ -2,8 +2,10 @@
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = mongoose.model('User');
 const response = require('../helpers/response');
+const config = require('../constants/config');
 
 exports.register = function(req, res) {
   var newUser = new User(req.body);
@@ -12,6 +14,7 @@ exports.register = function(req, res) {
     password = bcrypt.hashSync(password, 10);
   }
   newUser.hash_password = password;
+  newUser.verify_token = jwt.sign({ email_address: newUser.email_address }, config.EMAIL_TOKEN);
   newUser.save(function(err, user) {
     if (err) {
       var message = err;
@@ -21,7 +24,6 @@ exports.register = function(req, res) {
       }
       return res.status(400).send(response.build_response(400, 'error', message));
     } else {
-      user.hash_password = undefined;
       return res.json(response.build_response(200, 'success', 'User successfully registered', user));
     }
   });
