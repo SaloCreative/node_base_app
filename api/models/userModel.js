@@ -69,6 +69,16 @@ var UserSchema = new Schema({
   profile_image: {
     type: Object
   },
+  verify_token: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  reset_token: {
+    type: String,
+    trim: true,
+    default: ''
+  },
   created: {
     type: Date,
     default: Date.now
@@ -86,6 +96,8 @@ UserSchema.methods.comparePassword = function(password) {
 UserSchema.methods.toJSON = function() {
   var obj = this.toObject();
   delete obj.hash_password;
+  delete obj.reset_token;
+  delete obj.verify_token;
   return obj
 };
 

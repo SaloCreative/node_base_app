@@ -6,7 +6,7 @@
   "date_of_birth": "1979-01-01",
   "email_address": "joe.bloggs@me.co.uk",
   "email_verified": false,
-  "hash_password": "562134jbvhwghwigH%ui123r2r8UY£ER@£bnwkfwfwdf",
+  "hash_password": "562134323e23efafrf35465ff2342",
   "phone": "0100200300",
   "address_one": "Address line one",
   "address_two": "Address line 2",
@@ -14,6 +14,8 @@
   "county": "County",
   "country": "UK",
   "profile_image": {},
+  "verify_token": "ed2134124.re341234.12412wqfwrgw",
+  "reset_token": "rc2134124.df341234.12412wqdwrgw",
   "created": "2017-12-02 11:39:39.360Z",
   "last_modified": "2017-12-02 11:39:39.360Z"
 }
