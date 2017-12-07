@@ -37,7 +37,7 @@ exports.sign_in = function(req, res) {
           _id: user._id
         },
         grants: grants
-      }, config.JWT_KEY);
+      }, config.JWT.auth_sign);
 
       return res.json(response.build_response(200, 'success', 'Successfully logged in',
       {

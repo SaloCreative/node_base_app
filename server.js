@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const jsonwebtoken = require('jsonwebtoken');
 const cors = require('cors');
 const compression = require('compression');
+require('dotenv').config()
 
 const User = require('./api/models/userModel');
 const Grant = require('./api/models/grantModel');
@@ -41,7 +42,7 @@ app.use(function(req, res, next) {
 
 app.use(function(req, res, next) {
   if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], config.JWT_KEY, function(err, decode) {
+    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], config.JWT.auth_sign, function(err, decode) {
       if (err) req.user = undefined;
       req.user = decode;
       next();
