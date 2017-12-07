@@ -5,4 +5,7 @@ module.exports = function(app, db) {
 
   app.route('/auth/login')
     .post(authHandlers.sign_in);
+
+  app.route('/auth/validate')
+    .get(authHandlers.validate)
 };

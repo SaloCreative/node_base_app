@@ -55,6 +55,13 @@ exports.sign_in = function(req, res) {
 });
 };
 
+exports.validate = function(req, res, next) {
+  if (req.query.token) {
+    return res.json(response.build_response(200, 'success', 'Email successfully verified', { token: req.query.token }));
+  }
+  return res.status(401).send(response.build_response(401, 'error', 'Unauthorized user!'));
+}
+
 exports.loginRequired = function(req, res, next) {
   if (req.user) {
     next();
