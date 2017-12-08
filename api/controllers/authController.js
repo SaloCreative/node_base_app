@@ -12,10 +12,7 @@ const helperFunctions = require('../helpers/functions');
 const config = require('../constants/config');
 
 exports.sign_in = function(req, res) {
-  User.findOne({
-    email_address: req.body.email_address
-  }, function(err, user) {
-    if (err) throw err;
+  User.findOne({ email_address: req.body.email_address }, function(err, user) {
     if (!user || !user.comparePassword(req.body.password)) {
       return res.status(401).send(response.build_response(401, 'error', 'Authentication failed. Invalid email or password.'));
     }
@@ -56,8 +53,19 @@ exports.sign_in = function(req, res) {
 };
 
 exports.validate = function(req, res, next) {
+  let token;
   if (req.query.token) {
-    return res.json(response.build_response(200, 'success', 'Email successfully verified', { token: req.query.token }));
+    try {
+       token = jwt.verify(req.query.token, config.JWT.email_verify);
+    } catch(err) { /* Token error catch */ }
+    if (token) {
+      return User.findOneAndUpdate({ email_address: token.email_address }, { email_verified: true }, function(err, user) {
+        if (err || !user){
+          return res.status(400).send(response.build_response(400, 'error', 'Email could not be verified'))
+        }
+        return res.json(response.build_response(200, 'success', 'Email successfully verified'));
+      });
+    }
   }
   return res.status(401).send(response.build_response(401, 'error', 'Unauthorized user!'));
 }
