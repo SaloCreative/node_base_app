@@ -52,7 +52,7 @@ exports.sign_in = function(req, res) {
 });
 };
 
-exports.validate = function(req, res, next) {
+exports.validate = function(req, res) {
   let token;
   if (req.query.token) {
     try {
@@ -68,6 +68,19 @@ exports.validate = function(req, res, next) {
     }
   }
   return res.status(401).send(response.build_response(401, 'error', 'Unauthorized user!'));
+}
+
+exports.request_new_password = function(req, res) {
+  if (req.body && req.body.email_address) {
+    const passwordResetToken = jwt.sign({ email_address: req.body.email_address }, config.JWT.email_verify);
+    User.findOneAndUpdate({ email_address: req.body.email_address }, { reset_token: passwordResetToken }, { new: true }, function(err, user) {
+      if (!err && user) {
+        console.log(user.reset_token);
+      }
+    });
+    return res.status(200).send(response.build_response(200, 'success', 'If your email is registered you will receive a reset '));
+  }
+  return res.status(400).send(response.build_response(400, 'error', 'Unable to process password reset request'));
 }
 
 exports.loginRequired = function(req, res, next) {

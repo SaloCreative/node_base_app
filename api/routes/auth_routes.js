@@ -7,5 +7,8 @@ module.exports = function(app, db) {
     .post(authHandlers.sign_in);
 
   app.route('/auth/validate')
-    .get(authHandlers.validate)
+    .get(authHandlers.validate);
+
+  app.route('/auth/password/request')
+    .post(authHandlers.request_new_password);
 };
