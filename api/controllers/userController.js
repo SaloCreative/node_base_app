@@ -25,7 +25,7 @@ exports.register = function(req, res) {
       }
       return res.status(400).send(response.build_response(400, 'error', message));
     } else {
-      mailgun.sendRegistrationEmail();
+      mailgun.sendRegistrationEmail(user);
       return res.json(response.build_response(200, 'success', 'User successfully registered', user));
     }
   });

@@ -14,8 +14,9 @@ function buildConfig() {
       domain:  process.env.MAILGUN_DOMAIN,
       api_key: process.env.MAILGUN_API_KEY
     },
-    REGISTRATION: {
-      from_address: `Registrations | Node App <registration@${ process.env.API_URI }>`
+    EMAILS: {
+      registration_address: `Registrations | Node App <registration@${ process.env.MAILGUN_DOMAIN }>`,
+      reset_address: `Accounts | Node App <accounts@${ process.env.MAILGUN_DOMAIN }>`
     }
   }
   return config;

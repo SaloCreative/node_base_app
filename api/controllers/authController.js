@@ -10,6 +10,7 @@ const response = require('../helpers/response');
 const permissions = require('../constants/routePermissions');
 const helperFunctions = require('../helpers/functions');
 const config = require('../constants/config');
+const mailgun = require('../email/mailgun');
 
 exports.sign_in = function(req, res) {
   User.findOne({ email_address: req.body.email_address }, function(err, user) {
@@ -75,7 +76,7 @@ exports.request_new_password = function(req, res) {
     const passwordResetToken = jwt.sign({ email_address: req.body.email_address }, config.JWT.email_verify);
     User.findOneAndUpdate({ email_address: req.body.email_address }, { reset_token: passwordResetToken }, { new: true }, function(err, user) {
       if (!err && user) {
-        console.log(user.reset_token);
+        mailgun.sendResetEmail(user);
       }
     });
     return res.status(200).send(response.build_response(200, 'success', 'If your email is registered you will receive a reset '));
