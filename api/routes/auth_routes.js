@@ -11,4 +11,7 @@ module.exports = function(app, db) {
 
   app.route('/auth/password/request')
     .post(authHandlers.request_new_password);
+
+  app.route('/auth/password/reset')
+    .post(authHandlers.reset_password);
 };

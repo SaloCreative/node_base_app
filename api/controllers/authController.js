@@ -84,6 +84,10 @@ exports.request_new_password = function(req, res) {
   return res.status(400).send(response.build_response(400, 'error', 'Unable to process password reset request'));
 }
 
+exports.reset_password = function(req, res) {
+  return res.status(400).send(response.build_response(400, 'error', 'Unable to update password'));
+}
+
 exports.loginRequired = function(req, res, next) {
   if (req.user) {
     next();
