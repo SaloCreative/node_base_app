@@ -2,13 +2,13 @@ const grants = require('./grants');
 
 module.exports = {
   USERS: {
-    INDEX: {
+    LIST: {
       URL: '/users',
       METHOD: {
         GET: grants.USERS.index
       }
     },
-    ITEM: {
+    USER: {
       URL: '/users/:userId',
       METHOD: {
         GET: grants.USERS.show,
@@ -18,7 +18,7 @@ module.exports = {
     }
   },
   GRANTS: {
-    ITEM: {
+    USER: {
       URL: '/grants/:userId',
       METHOD: {
         POST: grants.GRANTS.create,
