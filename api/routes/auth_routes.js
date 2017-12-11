@@ -16,4 +16,7 @@ module.exports = function(app, db) {
 
   app.route('/auth/password/reset')
     .post(passwordHandlers.reset_password);
+
+    app.route('/auth/refresh')
+    .get(authHandlers.loginRequired, authHandlers.refresh_token);
 };

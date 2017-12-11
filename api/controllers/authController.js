@@ -4,12 +4,14 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const User = mongoose.model('User');
 const Grant = mongoose.model('Grant');
+const _ = require('lodash');
 
 const response = require('../helpers/response');
 const permissions = require('../constants/routePermissions');
 const helperFunctions = require('../helpers/functions');
 const config = require('../constants/config');
 
+/* LOGIN ROUTE */
 exports.sign_in = function(req, res) {
   User.findOne({ email_address: req.body.email_address }, function(err, user) {
     if (!user || !user.comparePassword(req.body.password)) {
@@ -50,6 +52,19 @@ exports.sign_in = function(req, res) {
   });
 });
 };
+
+/* REFRESH AUTH TOKEN */
+exports.refresh_token = function(req, res) {
+  if (!_.isEmpty(req.user) && req.user.data) {
+    const token = jwt.sign({
+      data: req.user.data,
+      grants: req.user.grants
+    }, config.JWT.auth_sign, { expiresIn: 60 * 60 * 24 });
+    return res.status(200).send(response.build_response(200, 'success', 'Token successfully refreshed', { token: token }));
+  } else {
+    return res.status(401).send(response.build_response(401, 'error', 'Unauthorized user!'));
+  }
+}
 
 /* PERMISSIONS AND AUTH CHECKS */
 

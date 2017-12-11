@@ -7,7 +7,7 @@
 ### Auth
 
 - **<code>POST</code> [auth/login](./documentation/auth/POST_login.md)** - _Login_
-- **<code>GET</code> [auth/token](./documentation/auth/GET_token.md)** - _Token refresh_  ---> **TODO**
+- **<code>GET</code> [auth/token](./documentation/auth/GET_token.md)** - _Token refresh_
 - **<code>GET</code> [auth/validate/:token](./documentation/auth/GET_email.md)** - _Email Validate_
 - **<code>POST</code> [auth/password/request](./documentation/auth/POST_email_request.md)** - _Request Password reset_
 - **<code>POST</code> [auth/password/reset](./documentation/auth/POST_email_reset.md)** - _Reset password_
