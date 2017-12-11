@@ -33,7 +33,7 @@ exports.sign_in = function(req, res) {
           _id: user._id
         },
         grants: grants
-      }, config.JWT.auth_sign);
+      }, config.JWT.auth_sign, { expiresIn: 60 * 60 * 24 });
 
       return res.json(response.build_response(200, 'success', 'Successfully logged in',
       {

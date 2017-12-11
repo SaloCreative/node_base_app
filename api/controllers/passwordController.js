@@ -11,7 +11,7 @@ const mailgun = require('../email/mailgun');
 
 exports.request_new_password = function(req, res) {
   if (req.body && req.body.email_address) {
-    const passwordResetToken = jwt.sign({ email_address: req.body.email_address }, config.JWT.email_verify);
+    const passwordResetToken = jwt.sign({ email_address: req.body.email_address }, config.JWT.email_verify, { expiresIn: 60 * 60 * 24 });
     User.findOneAndUpdate({ email_address: req.body.email_address }, { reset_token: passwordResetToken }, { new: true }, function(err, user) {
       if (!err && user) {
         mailgun.sendResetEmail(user);
@@ -31,11 +31,13 @@ exports.reset_password = function(req, res) {
     } catch(err) { /* Token error catch */ }
     if (token) {
       return User.findOneAndUpdate({ email_address: token.email_address }, { hash_password: password }, function(err, user) {
-        if (!err && user) {
+        if (!err) {
           return res.status(200).send(response.build_response(200, 'success', 'Your password was successfully updated'));
         }
-        return res.status(400).send(response.build_response(400, 'error', 'Unable to update password'));
+        return res.status(400).send(response.build_response(400, 'error', 'Unable to update password.'));
       });
+    } else {
+      return res.status(400).send(response.build_response(400, 'error', 'Unable to update password. Your reset link may of expired'));
     }
   }
   return res.status(422).send(response.build_response(422, 'error', 'Some required fields are missing. Make sure to send a reset_token and a password field.'));
