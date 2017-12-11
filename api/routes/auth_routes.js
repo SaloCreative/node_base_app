@@ -2,16 +2,18 @@
 
 module.exports = function(app, db) {
   const authHandlers = require('../controllers/authController.js');
+  const accountHandlers = require('../controllers/accountController.js');
+  const passwordHandlers = require('../controllers/passwordController.js');
 
   app.route('/auth/login')
     .post(authHandlers.sign_in);
 
   app.route('/auth/validate')
-    .get(authHandlers.validate);
+    .get(accountHandlers.validate);
 
   app.route('/auth/password/request')
-    .post(authHandlers.request_new_password);
+    .post(passwordHandlers.request_new_password);
 
   app.route('/auth/password/reset')
-    .post(authHandlers.reset_password);
+    .post(passwordHandlers.reset_password);
 };
